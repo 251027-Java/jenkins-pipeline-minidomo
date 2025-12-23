@@ -12,10 +12,6 @@ pipeline {
         jdk 'JDK25'  // Must match the JDK name configured in Jenkins Tools
     }
 
-    triggers {
-        githubPush()
-    }
-
     stages {
         stage('Hello') {
             steps {
