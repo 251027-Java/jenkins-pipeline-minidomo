@@ -30,26 +30,19 @@ pipeline {
         
         stage('Build') {
             steps {
-                // TODO: Complete this stage
-                // 1. Make mvnw executable: sh 'chmod +x mvnw'
-                // 2. Run Maven compile: sh './mvnw clean compile'
-                echo 'TODO: Add build commands here'
+                sh './mvnw -B clean compile' 
             }
         }
         
         stage('Test') {
             steps {
-                // TODO: Complete this stage
-                // Run Maven tests: sh './mvnw test'
-                echo 'TODO: Add test commands here'
+                sh './mvnw -B test'
             }
         }
         
         stage('Package') {
             steps {
-                // TODO: Complete this stage
-                // Create JAR file: sh './mvnw package -DskipTests'
-                echo 'TODO: Add package commands here'
+                sh './mvnw -B package -DskipTests'
             }
         }
     }
