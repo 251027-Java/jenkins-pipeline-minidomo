@@ -1,17 +1,17 @@
-# Jenkinsfile Template for Student Exercise
-# 
-# TODO: Complete the stages below to create a working CI/CD pipeline
-# 
-# This file should be named "Jenkinsfile" (no extension) and placed
-# in the root of your Git repository.
+// Jenkinsfile Template for Student Exercise
+//
+// TODO: Complete the stages below to create a working CI/CD pipeline
+//
+// This file should be named "Jenkinsfile" (no extension) and placed
+// in the root of your Git repository.
 
 pipeline {
     agent any
-    
+
     tools {
-        jdk 'JDK21'  // Must match the JDK name configured in Jenkins Tools
+        jdk 'JDK25'  // Must match the JDK name configured in Jenkins Tools
     }
-    
+
     stages {
         stage('Hello') {
             steps {
@@ -20,44 +20,37 @@ pipeline {
                 echo "Building on: ${env.NODE_NAME}"
             }
         }
-        
+
         stage('Checkout') {
             steps {
                 // The checkout happens automatically when using "Pipeline script from SCM"
                 echo 'Code checked out from Git'
             }
         }
-        
+
         stage('Build') {
             steps {
-                // TODO: Complete this stage
-                // 1. Make mvnw executable: sh 'chmod +x mvnw'
-                // 2. Run Maven compile: sh './mvnw clean compile'
-                echo 'TODO: Add build commands here'
+                sh './mvnw -B clean compile'
             }
         }
-        
+
         stage('Test') {
             steps {
-                // TODO: Complete this stage
-                // Run Maven tests: sh './mvnw test'
-                echo 'TODO: Add test commands here'
+                sh './mvnw -B test'
             }
         }
-        
+
         stage('Package') {
             steps {
-                // TODO: Complete this stage
-                // Create JAR file: sh './mvnw package -DskipTests'
-                echo 'TODO: Add package commands here'
+                sh './mvnw -B package -DskipTests'
             }
         }
     }
-    
+
     post {
         success {
             echo '✅ Pipeline completed successfully!'
-            echo "Artifact: target/*.jar"
+            echo 'Artifact: target/*.jar'
         }
         failure {
             echo '❌ Pipeline failed! Check the logs above for errors.'
